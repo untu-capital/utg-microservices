@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: security-server
+  labels:
+    app: security-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: security-server
+      labels:
+        app: security-server
+    spec:
+      containers:
+        - name: security-server
+          image: untucapital/security-server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8085
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kube
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: security-server

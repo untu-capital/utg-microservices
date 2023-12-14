@@ -1,0 +1,29 @@
+server:
+    port: 8086
+spring:
+    application:
+        name: cms
+    datasource:
+        password:
+        url: jdbc:mysql://localhost:3306/u-tran-gateway-db?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
+        username: root
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: com.mysql.cj.jdbc.Driver
+                format_sql: true
+        show-sql: true
+    zipkin:
+        base-url: http://zipkin:9411
+    rabbitmq:
+        addresses: rabbitmq:5672
+eureka:
+    client:
+        service-url:
+            defaultZone: http://eureka-server:7878/eureka
+        fetch-registry: true
+        register-with-eureka: true
+        enabled: false
+

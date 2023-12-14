@@ -1,0 +1,30 @@
+server:
+    port: 8080
+
+spring:
+    application:
+        name: api-gateway
+    zipkin:
+        base-url: http://zipkin:9411
+    cloud:
+       gateway:
+          routes:
+          - id: cms
+            uri: lb://cms
+            predicates:
+              - Path=/cms/**
+          - id: purchase-order
+            uri: lb://purchase-order
+            predicates:
+              - Path=/purchase-order/**
+          - id: credit-ms
+            uri: lb://credit-ms
+            predicates:
+              - Path=/credit-ms/**
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://eureka-server:7878/eureka
+        fetch-registry: true
+        register-with-eureka: true

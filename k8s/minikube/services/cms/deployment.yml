@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cms
+  labels:
+    app: cms
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: cms
+      labels:
+        app: cms
+    spec:
+      containers:
+        - name: cms
+          image: untucapital/cms:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kube
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: cms
